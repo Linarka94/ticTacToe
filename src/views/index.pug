@@ -1,0 +1,11 @@
+doctype html
+html(lang="ru")
+  include components/head.pug
+  include components/svg.pug
+
+  body
+    svg(class="icon-circle")
+      use(xlink:href="#icon-circle")
+    include components/page.pug
+
+    //- script(src="scripts.js")

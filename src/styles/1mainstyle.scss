@@ -1,0 +1,104 @@
+@import 'variables';
+
+@mixin font-face($fontname) {
+  font-family: #{$fontname};
+  src:
+    url('assets/fonts/#{$fontname}.woff2') format('woff2'),
+    url('assets/fonts/#{$fontname}.woff') format('woff');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  @include font-face(ptsansnarrow);
+}
+
+@font-face {
+  @include font-face(ptsansnarrowbold);
+}
+
+body {
+  margin: 0;
+  font-family: ptsansnarrow;
+  background-color: $bgc2;
+}
+
+b {
+  font-family: ptsansnarrowbold;
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+button {
+  border: none;
+  padding: 0;
+  background: none;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.visible-sm,
+.visible-md,
+.visible-lg {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  .visible-sm {
+    display: flex;
+  }
+
+  .hidden-sm {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .visible-md {
+    display: flex;
+  }
+
+  .hidden-md {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .visible-lg {
+    display: flex;
+  }
+
+  .hidden-lg {
+    display: none !important;
+  }
+}

@@ -1,0 +1,87 @@
+$breakpoints: (sm: 260px, md: 768px, lg: 1200px);
+$container-sizes: (sm: 100%, md: 640px, lg: 960px);
+$container-items: (sm: 12, md: 12, lg: 12);
+$container-indent: (sm: 15px, md: 30px, lg: 30px);
+
+%col-properties {
+  display: flex;
+  flex-flow: wrap;
+  flex-grow: 0;
+  flex-shrink: 0;
+  box-sizing: inherit;
+}
+
+@mixin break($size) {
+  @media (min-width: map-get($breakpoints, $size)) {
+    @content;
+  }
+}
+
+.container {
+  margin: auto;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  flex-flow: wrap;
+  box-sizing: inherit;
+}
+
+@each $key, $value in $container-sizes {
+  .container {
+    @include break($key) {
+      width: $value;
+    }
+  }
+}
+
+@each $key, $value in $container-indent {
+  .container {
+    @include break($key) {
+      padding-right: $value;
+      padding-left: $value;
+    }
+  }
+
+  .row {
+    @include break($key) {
+      margin-right: -$value;
+      margin-left: -$value;
+    }
+  }
+}
+
+.container-fluid {
+  @extend .container;
+  width: 100%;
+  margin: 0;
+}
+
+@each $key, $items in $container-items {
+  @for $i from 1 through $items {
+    .col-#{$key}-#{$i} {
+      @extend %col-properties;
+    }
+  }
+
+  @each $key-indent, $indent-value in $container-indent {
+    @include break($key) {
+      @if $key == $key-indent {
+        @for $i from 1 through $items {
+          .col-#{$key}-#{$i} {
+            flex-basis: $i/$items * 100%;
+            padding-right: $indent-value;
+            padding-left: $indent-value;
+          }
+        }
+
+        @for $i from 1 through $items {
+          .col-#{$key}-offset-#{$i} {
+            margin-left: $i/$items * 100%;
+          }
+        }
+      }
+    }
+  }
+}
