@@ -4,8 +4,7 @@ html(lang="ru")
   include components/svg.pug
 
   body
-    svg(class="icon-circle")
-      use(xlink:href="#icon-circle")
+    include components/header.pug
     include components/page.pug
 
-    //- script(src="scripts.js")
+    script(src="scripts.js")

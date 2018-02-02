@@ -1,0 +1,38 @@
+@import 'variables';
+
+.test-icons {
+  width: 200px;
+  margin-top: calc(50vh - 50px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.icon-circle {
+  width: 120px;
+  height: 120px;
+  cx: 50;
+  cy: 50;
+  r: 40;
+  fill: none;
+  stroke: $ticTac;
+  stroke-width: 14;
+  stroke-dasharray: 320;
+  transition-duration: 1s;
+}
+
+.icon-cross {
+  width: 120px;
+  height: 120px;
+  stroke-width: 3;
+  stroke: $ticTac;
+  stroke-dasharray: 48;
+  transition-duration: $crossTime;
+
+  &.show {
+    stroke-dashoffset: 0;
+  }
+
+  &.hidden {
+    stroke-dashoffset: 48;
+  }
+}

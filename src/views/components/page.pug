@@ -1,0 +1,32 @@
+mixin cell(id)
+  div(class="field-item" meta-id=id)
+    svg(class="icon-circle")
+      use(xlink:href="#icon-circle")
+
+    svg(class="icon-cross")
+      use(xlink:href="#icon-cross")
+
+.container.field
+  .row
+    .col-sm-4
+      +cell(0)
+    .col-sm-4
+      +cell(1)
+    .col-sm-4
+      +cell(2)
+
+  .row
+    .col-sm-4
+      +cell(3)
+    .col-sm-4
+      +cell(4)
+    .col-sm-4
+      +cell(5)
+
+  .row
+    .col-sm-4
+      +cell(6)
+    .col-sm-4
+      +cell(7)
+    .col-sm-4
+      +cell(8)

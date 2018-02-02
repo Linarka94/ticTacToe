@@ -1,0 +1,85 @@
+@import 'variables';
+
+.field {
+  margin-top: 50px;
+  &-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    height: 200px;
+    margin-right: -15px;
+    margin-left: -15px;
+    transition-duration: $bgTime;
+
+    &:hover {
+      background-color: $bgc2-dark;
+    }
+
+    &.win {
+      background-color: $bgc3;
+    }
+
+    &.cross {
+      .icon-cross {
+        width: 120px;
+        height: 120px;
+        stroke-dashoffset: 0;
+      }
+    }
+
+    &.circle {
+      .icon-circle {
+        width: 120px;
+        height: 120px;
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .icon-cross {
+      width: 0;
+      height: 0;
+      stroke-dashoffset: 48;
+    }
+
+    .icon-circle {
+      width: 0;
+      height: 0;
+      stroke-dashoffset: 320;
+    }
+  }
+  .row {
+    &:after {
+      content: '';
+      width: 100%;
+      height: 0;
+      display: flex;
+      border-bottom-style: solid;
+      border-bottom-color: $fieldBorder;
+      border-bottom-width: 6px;
+    }
+
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+
+    > div {
+      border-right-style: solid;
+      border-right-width: 3px;
+      border-right-color: $fieldBorder;
+      border-left-style: solid;
+      border-left-width: 3px;
+      border-left-color: $fieldBorder;
+
+      &:first-child {
+        border-left: none;
+      }
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+header.header
+  .container
+    .header-name
+      input(type="text" name="user-name" placeholder="What's your name?")
+
+    .header-dificult Dificulty:
+      label.header-dificult-easy 
+        input(type="radio" name="user-dificult" value="baby" checked="true")
+        span Easy
+
+      label.header-dificult-hard 
+        input(type="radio" name="user-dificult" value="evil")
+        span Hard 
+
+    .header-start
+      button(type="button") Start game!
+    
+    p.header-score.hidden Score: 
+      span.header-score-user 0
+      span.header-score-mind 0 
