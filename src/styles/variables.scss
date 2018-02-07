@@ -1,23 +1,37 @@
-$bgc: #1ABC9C;
-$bgc2: #2ecc71;
-$bgc3: #f1c40f;
-$bgc2-dark: #27ae60;
+$blue: #309adb;
+$gray: #283c51;
+$green: #2ecc71;
+$greenDark: #27ae60;
+$red: #e74c3c;
+$yellow: #f1c40f;
+$white: #ffffff;
 
-$ticTac: #fff;
-$fieldBorder: #fff;
+$bodyBgc: $green;
 
-$headerInputBorder: #fff;
-$headerOutline: #F1C40F;
-$headerItemBgc: #fff;
-$headerInputHadr: #E74C3C;
-$headerPaceholder: #283c51;
-$headerDificultEasy: #f1c40d;
-$headerDificultHard: #e74c3c;
-$headerDificultChecked: #309adb;
-$headerDificultCheckedText: #fff;
-$headerStartBorder: #309adb;
+$iconCircle: $white;
+$iconCross: $white;
+
+$fieldBorder: $white;
+$fieldHover: $greenDark;
+$fieldWin: $yellow;
+
+$headerBgc: $greenDark;
+$headerInputBorder: $white;
+$headerOutline: $yellow;
+$headerItemBgc: $white;
+$headerInputHadr: $red;
+$headerPaceholder: $gray;
+$headerDifficultEasy: $yellow;
+$headerDifficultHard: $red;
+$headerDifficultChecked: $blue;
+$headerDifficultCheckedText: $white;
+$headerStartBorder: $blue;
+
+$notifBgc: $yellow;
+$notifText: $gray;
 
 // duration
 $crossTime: 1s;
 $circleTime: 1s;
 $bgTime: 0.5s;
+$notifTime: 0.5s;

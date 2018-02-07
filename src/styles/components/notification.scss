@@ -1,0 +1,69 @@
+@import 'variables';
+
+.transparent-box {
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  z-index: 90;
+
+  &.show {
+    display: block;
+  }
+}
+
+.notification {
+  position: absolute;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 640px;
+  height: 200px;
+  top: -200px;
+  left: calc(50% - 320px);
+  transition-duration: $notifTime;
+  transition-timing-function: ease;
+  background-color: $notifBgc;
+  font-size: 20px;
+  color: $notifText;
+
+  &.show {
+    top: calc(50vh - 100px);
+  }
+
+  &-close {
+    align-self: flex-end;
+    margin-top: -20px;
+    margin-right: -20px;
+    cursor: pointer;
+
+    .icon-cross {
+      width: 40px;
+      height: 40px;
+      stroke-width: 3;
+      stroke: red;
+      stroke-dasharray: 0;
+    }
+
+    .icon-circle {
+      width: 40px;
+      height: 40px;
+      stroke-width: 3;
+      stroke: red;
+      stroke-dasharray: 0;
+    }
+  }
+
+  &-header {
+    font-size: 72px;
+    line-height: 80px;
+    font-family: ptsansnarrowbold;
+  }
+
+  &-text {
+    text-align: center;
+    padding-top: 30px;
+  }
+}

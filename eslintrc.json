@@ -25,7 +25,8 @@
     "location": false,
     "document": false,
     "navigator": false,
-    "window": false
+    "window": false,
+    "page": false
   },
 
   "rules": {

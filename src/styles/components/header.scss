@@ -21,7 +21,7 @@
 
 .header {
   height: 72px;
-  background-color: $bgc2-dark;
+  background-color: $headerBgc;
 
   &-name {
     display: flex;
@@ -45,7 +45,7 @@
     }
   }
 
-  &-dificult {
+  &-difficult {
     display: flex;
     height: 40px;
     align-items: center;
@@ -67,9 +67,9 @@
         padding-left: 10px;
         border-style: solid;
         border-width: 2px;
-        border-color: $headerDificultEasy;
+        border-color: $headerDifficultEasy;
         border-radius: 10px;
-        color: $headerDificultEasy;
+        color: $headerDifficultEasy;
         transition-duration: $bgTime;
         cursor: pointer;
       }
@@ -77,9 +77,9 @@
       input:checked + span {
         border-style: solid;
         border-width: 2px;
-        border-color: $headerDificultChecked;
-        background-color: $headerDificultChecked;
-        color: $headerDificultCheckedText;
+        border-color: $headerDifficultChecked;
+        background-color: $headerDifficultChecked;
+        color: $headerDifficultCheckedText;
       }
 
       input {
@@ -88,11 +88,11 @@
     }
 
     &-hard {
-      @extend .header-dificult-easy;
+      @extend .header-difficult-easy;
 
       span {
-        border-color: $headerDificultHard;
-        color: $headerDificultHard;
+        border-color: $headerDifficultHard;
+        color: $headerDifficultHard;
       }
     }
   }

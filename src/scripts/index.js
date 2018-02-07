@@ -1,6 +1,13 @@
 let page = {
   field: document.querySelectorAll('.field-item'),
   startBtn: document.querySelector('.header-start button'),
+  notification: {
+    close: document.querySelectorAll('[meta-aim=close-notification]'),
+    transparentBox: document.querySelector('.transparent-box'),
+    body: document.querySelector('.notification'),
+    title: document.querySelector('.notification-header'),
+    message: document.querySelector('.notification-text')
+  },
   positions: new Array(3),
   properties: {
     name: '',
@@ -17,18 +24,36 @@ let page = {
   },
 
   listeners: () => {
+    window.addEventListener('load', () => {
+      page.notify();
+    });
+
     page.startBtn.addEventListener('click', () => {
       let name = document.querySelector('.header-name input').value;
       let difficultyInput = document.querySelector('.header-dificult-easy input');
 
       page.initPositions();
       page.clearField();
-      page.properties.name = (name) ? name : 'user';
+      page.properties.name = (name) ? name : 'User';
       page.properties.difficulty = difficultyInput.value;
       page.field.forEach((cell) => {
         cell.addEventListener('click', page.user);
       });
     });
+
+    page.notification.close.forEach((item) => {
+      item.addEventListener('click', () => {
+        page.notification.body.className = 'notification';
+        page.notification.transparentBox.className = 'transparent-box';
+      });
+    });
+  },
+
+  notify: (title = `Let's play!`, message = 'Input your name and choose difficulty!') => {
+    page.notification.transparentBox.className += ' show';
+    page.notification.body.className += ' show';
+    page.notification.title.innerHTML = title;
+    page.notification.message.innerHTML = message;
   },
 
   mind: () => {
@@ -36,7 +61,6 @@ let page = {
 
     if (page.checkGamesEnd()) {
       page.stopGame();
-      alert('Финиш БЛЕАТЬ!!!');
     }
     else {
       if(page.difficulty === 'easy') {
@@ -109,6 +133,7 @@ let page = {
     }
 
     if (counter === page.positions.length * page.positions.length) {
+      page.notify(`It's draw!`, `Try it again`);
       return true;
     }
   },
@@ -145,13 +170,17 @@ let page = {
         paintCells(i);
         if (combinations[i][0] === 'X') {
           page.properties.userScore++;
-          console.log(`You win!!!! The score is:
-            ${page.properties.name}: ${page.properties.userScore} - mind: ${page.properties.mindScore}`);
+          page.notify(
+            `You win!!!`, 
+            `<b>${page.properties.name}</b> ${page.properties.userScore} - ${page.properties.mindScore} <b>Mind</b>`
+          );
         }
         else {
           page.properties.mindScore++
-          console.log(`You loooooose! The score is:
-            ${page.properties.name}: ${page.properties.userScore} - mind: ${page.properties.mindScore}`);
+          page.notify(
+            `You loooooose!`, 
+            `<b>${page.properties.name}</b> ${page.properties.userScore} - ${page.properties.mindScore} <b>Mind</b>`
+          );
         }
 
         page.changeScore();
