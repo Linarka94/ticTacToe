@@ -13,17 +13,18 @@
     transition-duration: $bgTime;
 
     &:hover {
-      background-color: $bgc2-dark;
+      background-color: $fieldHover;
     }
 
     &.win {
-      background-color: $bgc3;
+      background-color: $fieldWin;
     }
 
     &.cross {
       .icon-cross {
         width: 120px;
         height: 120px;
+        stroke: $iconCross;
         stroke-dashoffset: 0;
       }
     }
@@ -32,6 +33,7 @@
       .icon-circle {
         width: 120px;
         height: 120px;
+        stroke: $iconCircle;
         stroke-dashoffset: 0;
       }
     }
@@ -39,12 +41,14 @@
     .icon-cross {
       width: 0;
       height: 0;
+      stroke: $iconCross;
       stroke-dashoffset: 48;
     }
 
     .icon-circle {
       width: 0;
       height: 0;
+      stroke: $iconCircle;
       stroke-dashoffset: 320;
     }
   }
