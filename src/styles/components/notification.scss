@@ -46,14 +46,6 @@
       stroke: red;
       stroke-dasharray: 0;
     }
-
-    .icon-circle {
-      width: 40px;
-      height: 40px;
-      stroke-width: 3;
-      stroke: red;
-      stroke-dasharray: 0;
-    }
   }
 
   &-header {
@@ -67,3 +59,25 @@
     padding-top: 30px;
   }
 }
+
+@media (max-width: 767px) {
+  .notification {
+    width: 100%;
+    left: 0;
+
+    &-close {
+      margin-top: 0px;
+      margin-right: 0;
+    }
+
+    &-header {
+      font-size: 42px;
+      line-height: 42px;
+    }
+
+    &-text {
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+  }
+} 
