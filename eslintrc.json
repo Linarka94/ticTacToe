@@ -26,7 +26,8 @@
     "document": false,
     "navigator": false,
     "window": false,
-    "page": false
+    "page": false,
+    "game": false
   },
 
   "rules": {
