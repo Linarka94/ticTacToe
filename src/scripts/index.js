@@ -19,7 +19,7 @@ let page = {
       page.notify();
     });
 
-    page.startBtn.addEventListener('click', game.init);
+    page.startBtn.addEventListener('click', page.verification);
 
     page.notification.close.forEach((item) => {
       item.addEventListener('click', () => {
@@ -34,6 +34,21 @@ let page = {
     page.notification.body.className += ' show';
     page.notification.title.innerHTML = title;
     page.notification.message.innerHTML = message;
+  },
+
+  verification: () => {
+    let input = document.querySelector('.header-name input');
+    let name = input.value;
+    console.log(input);
+    if (name && (name.length > 1)) {
+      input.removeAttribute('style');
+      game.init();
+    }
+    else {
+      input.style.borderColor = 'red';
+      input.style.borderWidth = '3px';
+      page.notify('Input your name', 'Input your name and choose difficulty and click on Start Game!')
+    }
   }
 }
 
