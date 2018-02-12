@@ -22,6 +22,7 @@
 .header {
   height: 72px;
   background-color: $headerBgc;
+  margin-bottom: 10px;
 
   &-name {
     display: flex;
@@ -153,13 +154,13 @@
 @media (max-width: 767px) {
   .header {
     height: auto;
-    
+
     &-difficult,
     &-start {
       margin-top: 10px;
       margin-bottom: 10px;
     }
-    
+
     .container {
       flex-wrap: wrap;
       padding: 0;

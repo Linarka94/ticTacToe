@@ -2,8 +2,8 @@ let game = {
   field: document.querySelectorAll('.field-item'),
   positions: [],
   properties: {
-    name: '',
-    difficulty: '',
+    name: 'User',
+    difficulty: 'easy',
     userScore: '0',
     mindScore: '0',
   },
@@ -42,106 +42,25 @@ let game = {
 
     if (cellAviable) {
       game.fillPosition(id, 1);
-      game.addCrossIcon(id);
+      game.addIcon(id, 'cross', 0);
+      // game.addCrossIcon(id);
       if(!game.checkWinner()) {
         game.mind();        
       }
     }
   },
 
-  difficultyHard: () => {
-    let centralPosition = 4;
-    let cellNumber;
-
-    if (game.checkPosition(centralPosition)) {
-      cellNumber = centralPosition;
-    }
-    else {
-      let combinations = game.getWinCombinations();
-      cellNumber = checkCombinations(combinations);
-    }
-
-    game.fillPosition(cellNumber, -1);
-    game.addCircleIcon(cellNumber);
-
-    function checkCombinations(item) {
-      let position;
-
-      for (let i = 0; i < item.length; i++) {
-        let counter = 0;
-
-        for (let j = 0; j < item[i].length; j++) {
-          if (item[i][j] < 0 ) {
-            counter--;
-          }
-          else if (item[i][j] > 0 ) {
-            counter++;
-          }
-          else {
-            if (i % 3 === 0) {
-              position = Math.floor(i / 3) * 3 + j;
-            }
-            else if (i % 3 === 1) {
-              position = Math.floor(i / 3) + j * 3;
-            }
-            else if (i === 2) {
-              position = j * 4;
-            }
-            else {
-              position = 6 - 2 * j; 
-            }
-          }
-        }
-        if (counter > 1) {
-          return position;
-        }
-      }
-
-      while (!game.checkPosition(position)) {
-        position = Math.floor(Math.random() * game.field.length);
-      }
-      return position;
-    }
+  addIcon: (id, className, time) => {
+    setTimeout(() => {
+      game.field[id].className += ` ${className}`;
+    }, time)
   },
 
-  difficultyEasy: () => {
-    let cellNumber = Math.floor(Math.random() * game.field.length);
-    let cellAviable = game.checkPosition(cellNumber);
-    
-    if (cellAviable) {
-      game.fillPosition(cellNumber, -1);
-      game.addCircleIcon(cellNumber);
-    } 
-    else {
-      game.difficultyEasy();
-    }
-  },
-
-  initPositions: () => {
-    for (let j = 0; j < 3; j++) {
-      game.positions[j] = [];
-
-      for (let i = 0; i < 3; i++) {
-        game.positions[j][i] = NaN;
-      }
-    }
-  },
-
-  checkPosition: (id) => {
-    if (!id) {
-      return false
-    }
-
-    let row = Math.floor(id/3);
-    let col = id % 3;
-    if (!game.positions[row][col])
-      return true;
-  },
-
-  fillPosition: (id, item) => {
-    let row = Math.floor(id/3);
-    let col = id % 3;
-    game.positions[row][col] = item;
+  changeScore: () => {
+    let user = document.querySelector('.header-score-user');
+    let mind = document.querySelector('.header-score-mind');
+    user.innerHTML = game.properties.userScore;
+    mind.innerHTML = game.properties.mindScore;
   },
 
   checkGamesEnd: () => {
@@ -161,31 +80,15 @@ let game = {
     }
   },
 
-  getWinCombinations: () => {
-    let combinations = [];
-    
-    for (let i = 0; i < game.positions.length; i++) {
-      let line = [];
-      let col = [];
-      let diog = [];
-
-      for (let j = 0; j < game.positions.length; j++) {
-        line.push(game.positions[i][j] * (i * game.positions.length + j  + 0.5));
-        col.push(game.positions[j][i] * (j * game.positions.length + i + 0.5));
-
-        if (i < 1) {
-          diog.push(game.positions[j][j] * (j * 4 + 0.5));
-        }
-        else {
-          diog.push(game.positions[game.positions.length - j - 1][j] *  (- j * 2 + 6.5));
-        }
-      }
-
-      combinations.push(line);
-      combinations.push(col);
-      combinations.push(diog);
+  checkPosition: (id) => {
+    if (!id) {
+      return false
     }
-    return combinations;
+
+    let row = Math.floor(id/3);
+    let col = id % 3;
+    if (!game.positions[row][col])
+      return true;
   },
 
   checkWinner: () => {
@@ -229,32 +132,126 @@ let game = {
     }
   },
 
-  stopGame: () => {
-    game.field.forEach((cell) => {
-      cell.removeEventListener('click', game.user);
-    });
-  },
-
-  addCrossIcon: (id) => {
-    game.field[id].className += ' cross';
-  },
-
-  addCircleIcon: (id) => {
-    setTimeout(() => {
-      game.field[id].className += ' circle';
-    }, 500)
-  },
-
   clearField: () => {
     for (let i = 0; i < game.field.length; i++) {
       game.field[i].className = 'field-item';
     }
   },
 
-  changeScore: () => {
-    let user = document.querySelector('.header-score-user');
-    let mind = document.querySelector('.header-score-mind');
-    user.innerHTML = game.properties.userScore;
-    mind.innerHTML = game.properties.mindScore;
+  difficultyEasy: () => {
+    let cellNumber = Math.floor(Math.random() * game.field.length);
+    let cellAviable = game.checkPosition(cellNumber);
+    
+    if (cellAviable) {
+      game.fillPosition(cellNumber, -1);
+      game.addIcon(cellNumber, 'circle', 500);
+    } 
+    else {
+      game.difficultyEasy();
+    }
+  },
+
+  difficultyHard: () => {
+    let centralPosition = 4;
+    let cellNumber;
+
+    if (game.checkPosition(centralPosition)) {
+      cellNumber = centralPosition;
+    }
+    else {
+      let combinations = game.getWinCombinations();
+      cellNumber = checkCombinations(combinations);
+    }
+
+    game.fillPosition(cellNumber, -1);
+    game.addIcon(cellNumber, 'circle', 500);
+
+    function checkCombinations(item) {
+      let position;
+
+      for (let i = 0; i < item.length; i++) {
+        let counter = 0;
+
+        for (let j = 0; j < item[i].length; j++) {
+          if (item[i][j] < 0 ) {
+            counter--;
+          }
+          else if (item[i][j] > 0 ) {
+            counter++;
+          }
+          else {
+            if (i % 3 === 0) {
+              position = Math.floor(i / 3) * 3 + j;
+            }
+            else if (i % 3 === 1) {
+              position = Math.floor(i / 3) + j * 3;
+            }
+            else if (i === 2) {
+              position = j * 4;
+            }
+            else {
+              position = 6 - 2 * j; 
+            }
+          }
+        }
+        if (counter > 1) {
+          return position;
+        }
+      }
+
+      while (!game.checkPosition(position)) {
+        position = Math.floor(Math.random() * game.field.length);
+      }
+      return position;
+    }
+  },
+
+  initPositions: () => {
+    for (let j = 0; j < 3; j++) {
+      game.positions[j] = [];
+
+      for (let i = 0; i < 3; i++) {
+        game.positions[j][i] = NaN;
+      }
+    }
+  },
+
+  fillPosition: (id, item) => {
+    let row = Math.floor(id/3);
+    let col = id % 3;
+    game.positions[row][col] = item;
+  },
+
+  getWinCombinations: () => {
+    let combinations = [];
+    
+    for (let i = 0; i < game.positions.length; i++) {
+      let line = [];
+      let col = [];
+      let diog = [];
+
+      for (let j = 0; j < game.positions.length; j++) {
+        line.push(game.positions[i][j] * (i * game.positions.length + j  + 0.5));
+        col.push(game.positions[j][i] * (j * game.positions.length + i + 0.5));
+
+        if (i < 1) {
+          diog.push(game.positions[j][j] * (j * 4 + 0.5));
+        }
+        else {
+          diog.push(game.positions[game.positions.length - j - 1][j] *  (- j * 2 + 6.5));
+        }
+      }
+
+      combinations.push(line);
+      combinations.push(col);
+      combinations.push(diog);
+    }
+    return combinations;
+  },
+
+  stopGame: () => {
+    game.field.forEach((cell) => {
+      cell.removeEventListener('click', game.user);
+    });
   }
 }
