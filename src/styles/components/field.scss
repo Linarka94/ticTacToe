@@ -93,7 +93,7 @@
 
 @media (max-width: 767px) {
   .field {
-    margin-top: calc(50vh - 52vw - 25px);
+    padding-top: calc(50vh - 100vw - 25px);
 
     &-item {
       height: 33vw;
